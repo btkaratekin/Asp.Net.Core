@@ -8,5 +8,6 @@ namespace OgrIsler.DataAccess.Abstract
 {
     public interface IOgrBilgiDal:IEntityRepository<Bilgi>
     {
+        
     }
 }

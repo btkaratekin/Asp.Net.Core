@@ -1,6 +1,8 @@
-﻿using OgrIsler.Business.Abstract;
+﻿using Ninject;
+using OgrIsler.Business.Abstract;
 using OgrIsler.Core.Abstract;
 using OgrIsler.DataAccess.Abstract;
+using OgrIsler.DataAccess.Concrete;
 using OgrIsler.Entities.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -13,20 +15,29 @@ namespace OgrIsler.Business.Concrete
     public class OgrBilgiService : IOgrBilgiService
     {
         public readonly IOgrBilgiDal _OgrBilgiDal;
+        public readonly StandardKernel _kernel;
 
-        public OgrBilgiService(IOgrBilgiDal ogrBilgiDal)
+        public OgrBilgiService()
         {
-            _OgrBilgiDal = ogrBilgiDal;
+            _kernel = new StandardKernel();
+            _kernel.Bind<IOgrBilgiService>().To<OgrBilgiService>().InSingletonScope();
+            _kernel.Bind<IOgrBilgiDal>().To<OgrBilgiDal>().InSingletonScope();
+            _OgrBilgiDal = new OgrBilgiDal();
         }
+
+        //public OgrBilgiService(IOgrBilgiDal ogrBilgiDal)
+        //{
+        //    _OgrBilgiDal = ogrBilgiDal;
+        //}
 
         public void Delete(Bilgi Entity)
         {
-            throw new NotImplementedException();
+            _OgrBilgiDal.Delete(Entity);
         }
 
-        public Task<Bilgi> Get(Expression<Func<Bilgi, bool>> filter = null)
+        public async Task<Bilgi> Get(Expression<Func<Bilgi, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return await _OgrBilgiDal.Get(filter);
         }
 
         public async Task<IList<Bilgi>> GetList(Expression<Func<Bilgi, bool>> filter = null)
@@ -36,12 +47,12 @@ namespace OgrIsler.Business.Concrete
 
         public void Insert(Bilgi Entity)
         {
-            throw new NotImplementedException();
+             _OgrBilgiDal.Insert(Entity);
         }
 
         public void Update(Bilgi Entity)
         {
-            throw new NotImplementedException();
+            _OgrBilgiDal.Update(Entity);
         }
     }
 }

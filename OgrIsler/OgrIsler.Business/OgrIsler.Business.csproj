@@ -8,4 +8,12 @@
     <ProjectReference Include="..\OgrIsler.DataAccess\OgrIsler.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Concrete\Dependency\" />
+  </ItemGroup>
+
 </Project>

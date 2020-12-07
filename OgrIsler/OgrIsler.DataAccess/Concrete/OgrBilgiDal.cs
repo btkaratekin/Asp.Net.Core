@@ -8,7 +8,8 @@ using System.Text;
 
 namespace OgrIsler.DataAccess.Concrete
 {
-   public class OgrBilgiDal:EfRepositoryBase<Bilgi,OgrIslerDbContext>,IOgrBilgiDal
+    public class OgrBilgiDal : EfRepositoryBase<Bilgi, OgrIslerDbContext>, IOgrBilgiDal
     {
+        
     }
 }
